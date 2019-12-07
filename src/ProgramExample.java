@@ -44,4 +44,24 @@ public class ProgramExample {
         int g = l % 10;
         System.out.println("五位数之和为: " + (w + q + b + s + g));//此处注意字符串拼接问题
     }
+
+    /**
+     * 面试题：&和&&的区别
+     */
+    @Test
+    public void testFn1(){
+        int a = 4;
+        int b = 6;
+        if(a < 7 || b++>6){
+            System.out.println(a + b);
+        }else{
+            System.out.println(a*b);
+        }
+
+        if(a < 6 && b++>6){
+            System.out.println(a - b);
+        }else{
+            System.out.println(a/b);
+        }
+    }
 }
