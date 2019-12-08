@@ -2,6 +2,8 @@ package com.weichuang.day02Demo;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class ProgramExample {
 
     private int a;
@@ -288,6 +290,35 @@ public class ProgramExample {
             System.out.print(arr[i] + ",");
         }
         System.out.print("]");
+
+    }
+
+    /**
+     * 选择排序算法
+     */
+    @Test
+    public void testFn10(){
+        int[] arr = {11,2,55,6,88,77};
+        //11,2,55,6,88,77  i = 0 , 此时i = 1 minIndex = 1;做交换 minIndex所在的值与第一个交换
+        //2  11 55 6 88 77  第一轮结束  i = 1  minIndex = 3
+        // 2 6 55 11 88 77 第二轮结束
+        for(int i = 0 ; i < arr.length ; i++){
+            int minIndex = i;
+            for(int j = i+1 ; j < arr.length ; j++){
+                if(arr[minIndex] < arr[j]){
+                    minIndex = j;
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+            System.out.println(Arrays.toString(arr));
+        }
+        /*System.out.print("[");
+        for(int i = 0 ; i < arr.length ; i++){
+            System.out.print(arr[i] + ",");
+        }
+        System.out.print("]");*/
 
     }
 }
