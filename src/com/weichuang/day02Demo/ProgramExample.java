@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class ProgramExample {
 
+    private int a;
     /**
      * 方法定义
      */
@@ -96,5 +97,91 @@ public class ProgramExample {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * 数组的定义
+     */
+    @Test
+    public void testFn1(){
+        int s1 = 20180206;
+        int s2 = 20180305;
+        //int s1 = 20193213;
+        int[] students = new int[50];
+        //1、面的初始化方式为动态初始化数组,索引从0开始
+        students[0] = 20180206;
+        students[1] = 20180305;
+        int len = students.length;
+        System.out.println(len);
+        int[] students2;
+        students2 = new int[50];
+        //2、先定义，后分配空间
+        int[] students3 = new int[]{1,2,3,4,5};
+        //3、静态初始化、直接赋值决定空间大小
+        System.out.println(students3.length);
+        int[] students4 = {1,2,3,4};
+        //4、静态初始化，上面第三种的简单写法。比较常用
+        System.out.println(students4.length);
+        //java抛出异常，数组越界异常(java.lang.ArrayIndexOutOfBoundsException: 4) ,0,1,2,3
+        System.out.println(students4[students4.length - 1]);
+
+        for(int i = 0 ; i < len ; i ++){
+            students[i] = s1 + i;
+            int s = students[i];
+            System.out.println(s);
+        }
+
+    }
+
+    /**
+     * foreach循环
+     */
+    @Test
+    public void testFn2(){
+        int[] array = {43,22,11,33,22};
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
+        //foreach语法 int x:x的类型必须是你数组封装类型。场景，你不需要应用数组的索引做操作的时候即可使用此方式
+        for (int x : array) {
+            System.out.println(x);
+        }
+
+    }
+
+    /**
+     * 可变参数
+     * 可变参数位置，必须放在方法里面的最后一个参数位置
+     */
+    @Test
+    public void testFn3(){
+        sortArray(10 , 11, 22, 12);
+    }
+
+    public void sortArray(int b , int... a){
+        System.out.println(b);
+        for(int x : a){
+            System.out.println(x);
+        }
+    }
+
+    /**
+     *
+     * 空指针异常（NullPointerException）
+     * 数组越界异常（ArrayIndexOutOfBoundsException ）
+     */
+    @Test
+    public void testFn4(){
+        int[] array = {43,22,11,33,22};
+        for(int i = 0 ; i < array.length ; i++){
+            System.out.println(array[i]);
+        }
+        int[] arrays = getStudentsNo();
+        System.out.println(arrays[1]);
+    }
+    public int[] getStudentsNo(){
+        int[] arrays = null;
+
+        return arrays;
     }
 }
