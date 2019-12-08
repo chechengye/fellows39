@@ -184,4 +184,110 @@ public class ProgramExample {
 
         return arrays;
     }
+
+    /**
+     * 猜数游戏：从键盘中任意输入一个数据，判断数列中是否包含此数。
+     */
+    @Test
+    public void testFn5(){
+        int[] arr = {32,12,45,77,88};
+        boolean b = findX(arr, 9);
+        if(b) System.out.println("猜对了!!");
+        else System.out.println("猜错了!!");
+
+        //第二种方法
+        findX(99 , arr);
+    }
+    private void findX(int X  ,int[] arr ) {
+        boolean flag = false;
+        for(int i : arr) {
+            if (i == X){
+                flag = true;
+                break;
+            }
+        }
+        if(flag) System.out.println("猜对了");
+        else System.out.println("猜错了");
+    }
+    private boolean findX(int[] arr, int X) {
+        for(int i : arr){
+            if(i == X)
+                return true;
+        }
+        return false;
+    }
+    /**
+     * 多维数组
+     * 一起来参加屌丝程序员大赛吧，有3个班级各3名学员参赛，
+     * 记录每个学员的成绩，并计算每个班的平均分。
+     */
+    @Test
+    public void testFn6(){
+        int[][] c = {{11,33,55},{44,66,77},{88,3,11,5}};
+        for(int i = 0 ; i < c.length ; i ++){
+            int totalScore = 0;
+            for(int j = 0 ; j < c[i].length ; j++){
+                totalScore += c[i][j];
+            }
+            System.out.println("第" + (i + 1) + "个班级的平均成绩为: "
+                    + (totalScore * 1.0 /  c[i].length));
+        }
+    }
+    /**
+     * 在一个数列中找出最大的数
+     */
+    @Test
+    public void testFn7(){
+        int[] arr = {-1 , 32,12,45,77,88};
+        int maxValue = arr[0];
+        for(int x : arr){
+            if(x > maxValue){
+                maxValue = x;
+            }
+        }
+        System.out.println(maxValue);
+    }
+
+    /**
+     * 在一个数列中找出最小的数
+     */
+    @Test
+    public void testFn8(){
+        int[] arr = {-1 , 32,12,45,77,88};
+        int minValue = arr[0];
+        for(int x : arr){
+            if(x < minValue){
+                minValue = x;
+            }
+        }
+        System.out.println(minValue);
+    }
+    /**
+     * 冒泡排序
+     */
+    @Test
+    public void testFn9(){
+        int[] arr = {11,2,55,6,88,77};
+        //11,2,55,6,88,77
+        //i = 11 , i + 1 = 2
+        // 交换一次 2 11 55 6 88 77
+        // 交换二次 2 11 6 55 88 77
+        // 交换三次 2 11 6 55 77 88 // 至此为止第一轮操作结束  88下沉到最后
+        //第二轮结果  2 6 11 55 77 88
+        for(int i = 0 ; i < arr.length - 1 ; i ++){
+            for(int j = 0 ; j < arr.length - i - 1 ; j ++){
+                if(arr[j] > arr[j + 1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        System.out.print("[");
+        for(int i = 0 ; i < arr.length ; i++){
+            System.out.print(arr[i] + ",");
+        }
+        System.out.print("]");
+
+    }
 }
