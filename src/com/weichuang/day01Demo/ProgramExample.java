@@ -1,3 +1,5 @@
+package com.weichuang.day01Demo;
+
 import org.junit.Test;
 
 import java.util.Scanner;
@@ -284,5 +286,137 @@ public class ProgramExample {
             i++;
         }while (i<=10);
         System.out.println(sum);
+    }
+
+    /**
+     * for循环简单示例
+     *
+     *
+     1、标准写法
+     2、表达式1省略，但在外部声明
+     3、表达式2省略，死循环
+     4、表达式3省略，但是要声明在循环内部
+     5、表达式1,3省略，但是要声明在循环的外部和内部
+     6、三个表达式都省略,死循环
+     */
+    @Test
+    public void testFn14(){
+        int i = 0,j=1;
+        for( ; ; ){
+            if(i == 4)
+                break;
+            i++;
+            System.out.println(i);
+        }
+    }
+
+    /**
+     * 打印输出0~200之间能被7整除但不能被4整除的所有整数；
+     */
+    @Test
+    public void testFn15(){
+        for(int i = 0 ; i < 201 ; i++){
+            if(i % 7 == 0 && i % 4 != 0){
+                System.out.print(i + " ");
+            }
+        }
+    }
+    /**
+     * 输出10个斐波那契（Fibonacci）数列：1 1 2 3 5 8 13 21 34 55。
+     * （特点：第1,2两个数值为1，从第三个数开始，该数是其前面两个数之和）
+     */
+    @Test
+    public void testFn16(){
+        int i = 1 , j = 1;
+        for(int n = 0 ; n < 5 ; n ++){
+            System.out.print(i + " " + j + " ");
+            i = i + j;
+            j = i + j;
+        }
+    }
+
+    /**
+     * *
+     * **
+     * ***
+     * ****
+     * *****
+     */
+    @Test
+    public void testFn17(){
+        for(int i = 1 ; i <= 5 ; i++){
+            for(int j = 1 ; j <= i ; j++){
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * 1x1=1
+     * 1x2=1 2x2=2
+     * ..
+     * ..
+     * ..
+     */
+    @Test
+    public void testFn18(){
+        for(int i = 1 ; i <= 9 ; i++){
+            for(int j = 1 ; j <= i ; j++){
+                System.out.print(j + "x" + i + "=" + j*i + "\t");
+            }
+            System.out.println();
+        }
+    }
+    /**
+     *     *
+     *    **
+     *   ***
+     *  ****
+     * *****
+     */
+    @Test
+    public void testFn19(){
+        for(int i = 1 ; i <= 5 ; i++){
+            //第二遍 i = 2
+            for(int j = 5 ; j >= 1; j--){
+                //第二遍的j = 5,   *j=1*
+                if(j<=i){
+                    System.out.print("*");
+                }else{
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+    /**
+     *     *
+     *    ***
+     *   *****
+     *  *******
+     * *********
+     *     A
+     *    BBB
+     *   CCCCC
+     *  DDDDDDD
+     * EEEEEEEEE
+     */
+    @Test
+    public void testFn20(){
+        char a = 'A';
+        for(int i = 1 ; i <= 8 ; i++){
+            for(int j = 8 ; j > i ; j--){
+                System.out.print(" ");
+            }
+            for(int k = 1 ; k <= 2 * i -1 ; k++){
+                System.out.print(a);
+            }
+            a++;
+            //char类型自增ASCII变为下一个char型，但是 a=a+1 就自动类型转换为int
+            //a = a + 1;
+
+            System.out.println();
+        }
     }
 }
