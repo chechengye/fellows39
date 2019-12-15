@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Random;
 
-public class ProgrmExample {
+public class ProgramExample {
 
     @Test
     public void testFn(){
@@ -111,4 +111,53 @@ public class ProgrmExample {
             return "一等奖";
         else return "未中奖";
     }
+
+    @Test
+    public void testFn2(){
+        Dog hsq = new Dog();//对象
+        hsq.name = "哈士奇";
+        hsq.color = "黄色";
+        hsq.eat();
+        Dog td = new Dog();//对象
+        td.name = "泰迪";
+        td.color = "黑色";
+        td.eat();
+        new Dog().move();//实例化了一个对象，匿名对象
+        //Dog dog2 = null;//java.lang.NullPointerException
+        //dog2.eat();
+        //td = null;//会立即回收
+        //不主动释放，那么闲置的内存也会被GC垃圾回收机制自动回收(不会立即回收，时间片轮询)
+        td = hsq;
+        td.name = "嘿嘿";
+        System.out.println(hsq.name);
+        method(hsq);
+        System.out.println(hsq.name);
+        Horse horse = new Horse();
+        //td = horse;//类型不符
+
+    }
+
+    private static void method(Dog dog){
+        dog.name = "白白";
+    }
 }
+
+class Horse{
+    String name;
+    int age;
+}
+//内部类
+class Dog{
+    String name;
+    int age;
+    String color;
+
+    public void eat(){
+        System.out.println(color + "的" + name + "在吃...");
+    }
+
+    void move(){
+        eat();
+    }
+}
+
