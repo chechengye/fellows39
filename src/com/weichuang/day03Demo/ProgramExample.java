@@ -134,17 +134,138 @@ public class ProgramExample {
         System.out.println(hsq.name);
         Horse horse = new Horse();
         //td = horse;//类型不符
-
+        horse.setName("小白马");
+        //System.out.println(horse.getName());
+        System.out.println(horse);
     }
 
     private static void method(Dog dog){
         dog.name = "白白";
     }
+
+    /**
+     * 构造方法举例
+     */
+    @Test
+    public void testFn3(){
+        Horse horse = new Horse();
+        //td = horse;//类型不符
+        horse.setName("小白马");
+        //System.out.println(horse.getName());
+        System.out.println(horse);
+        Horse horse1 = new Horse("小黑马" , "黑色");
+        System.out.println(horse1);
+    }
+
+    /**
+     * 值传递&引用传递
+     */
+    @Test
+    public void testFn4(){
+        int x = 10;
+        method(x);
+        System.out.println(x);
+        Horse horse = new Horse();
+        method(horse);
+        System.out.println(horse.age);
+        String name = "小飞";
+        method(name);
+        System.out.println(name);
+    }
+
+    public void method(String name){
+        name = "小贝";
+    }
+    public void method(Horse horse){
+        horse.age = 20;
+    }
+
+    public void method(int x){
+        x = 20;
+    }
+
+    @Test
+    public void testFn5(){
+        Hero hero = new Hero();
+        hero.setName("关羽");
+        Weapon weapon = new Weapon("青龙偃月刀");
+        weapon.setName("青龙偃月刀");
+        //hero.setWeapon(weapon);//new Weapon("青龙偃月刀")
+        weapon.setHero(hero);
+        System.out.println(weapon);
+    }
+
 }
 
+
+
 class Horse{
-    String name;
-    int age;
+    //封装过程
+    private String name;
+    public int age = 5;
+    private String color;
+
+    //默认构造方法或无参构造方法
+
+    /**
+     * 构造方法:
+     * 1、方法名称与类名称一致
+     * 2、无返回类型，连void都不允许写
+     * 3、可以有参数
+     * 4、若你写了带参数的构造方法，那么 会自动替换调默认的构造方法，除非你主动补上
+     */
+    public Horse(){
+        this("","");
+        System.out.println("无参构造方法!!!");
+    }
+
+    /**
+     * 可以初始化，破坏了封装性
+     * 两个构造方法直接互相称为构造方法重载
+     * @param name
+     * @param color
+     */
+    public Horse(String name , String color){
+        this.name = name;
+        this.color = color;
+        this.method();
+    }
+
+    public void method(){
+        System.out.println("这是一个普通方法!!!");
+    }
+
+    public void setName(String name){
+        this.name = name;//就近原则
+    }
+    public String getName(){
+        return this.name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "Horse{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }
 //内部类
 class Dog{
@@ -158,6 +279,72 @@ class Dog{
 
     void move(){
         eat();
+    }
+}
+
+/**
+ * 对象的一对一关系
+ * 关系：谁到谁，谁与谁
+ */
+class Hero{
+    private String name;
+    private Weapon weapon;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    @Override
+    public String toString() {
+        return "Hero{" +
+                "name='" + name + '\'' +
+                ", weapon=" + weapon +
+                '}';
+    }
+}
+class Weapon{
+    private String name;
+    private Hero hero;
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public Weapon(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Weapon{" +
+                "name='" + name + '\'' +
+                ", hero=" + hero +
+                '}';
     }
 }
 
