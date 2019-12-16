@@ -92,7 +92,7 @@ public class ProgramExample {
         int redCount = 0;
         for(String sysRed : sysRedBalls){
             for(String userRed : userRedBalls){
-                if(sysRed == userRed) redCount ++;
+                if(sysRed.equals(userRed)) redCount ++;
             }
         }
         int blueCount = 0;
@@ -267,7 +267,7 @@ class Horse{
                 '}';
     }
 }
-//内部类
+
 class Dog{
     String name;
     int age;
