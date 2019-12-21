@@ -267,7 +267,7 @@ class Horse{
                 '}';
     }
 }
-
+//内部类
 class Dog{
     String name;
     int age;
