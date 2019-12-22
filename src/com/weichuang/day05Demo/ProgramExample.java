@@ -34,6 +34,63 @@ public class ProgramExample {
         cm.add(new Cosmetic("测试" , 11 , "进口"));
         cm.printAll();
     }
+
+    /**
+     * final测试
+     */
+    @Test
+    public void testFn2(){
+        HuskyDog huskyDog = new HuskyDog();
+        huskyDog.drink();
+    }
+
+    /**
+     * 抽象类测试
+     */
+    @Test
+    public void testFn3(){
+        AbsPerson man = new Man();//多态的向上自动转型
+        AbsPerson women = new Women();
+        method(women);
+    }
+    public void method(AbsPerson absPerson){
+        //类型判断instanceof 前者是否属于后者
+        if(absPerson instanceof Man){
+           Man man = (Man) absPerson ;//向下转型。必须强制类型转换，且需要先确定好类型
+           man.eat();
+        }else if(absPerson instanceof Women){
+            Women women = (Women) absPerson ;
+            women.eat();
+        }
+    }
+    /**
+     * 测试多态
+     */
+    @Test
+    public void testFn4(){
+        A a1 = new A();
+        A a2 = new B(); //向上自动转型
+        B b = new B();
+        C c = new C();
+        D d = new D();
+        a1.show(b);
+        System.out.println("------------");
+        a1.show(c);
+        System.out.println("------------");
+        a1.show(d);
+        System.out.println("------------");
+        a2.show(b);
+        System.out.println("------------");
+        a2.show(c);
+        System.out.println("------------");
+        a2.show(d);
+        System.out.println("------------");
+        b.show(b);
+        System.out.println("------------");
+        b.show(c);
+        System.out.println("------------");
+        b.show(d);
+    }
 }
 
 /**
@@ -199,3 +256,181 @@ class CosmeticManager{
         }
     }
 }
+
+/**
+ * 储存常量的类
+ */
+class Constants{
+    public static final int DOG_NUM = 3;
+    public static final String ADD_SUCCESS = "添加成功";
+    public static final int MSG_CODE = 101;
+}
+/**
+ * final关键字讲解
+ * 1、final 修饰类不能被继承
+ * 2、final修饰方法不能被重写
+ * 3、final修饰属性，不能被修改
+ */
+class Dog{
+    public static final int DOG_NUM = 3;
+
+    public final void drink(){
+        System.out.println("喝....");
+    }
+    public void eat(){
+        final int i = 10;
+        System.out.println(i);
+    }
+}
+class HuskyDog extends Dog{
+}
+
+/**
+ * 抽象类讲解
+ * 1、若该类中，已经存在一个或多个抽象方法，那么该类一定定义为抽象类
+ * 2、若该类为抽象类，那它里面可以没有抽象方法
+ * 3、抽象类可以继承抽象类，且不需要事先父类里面的抽象方法
+ */
+abstract class AbsPerson implements IBird{
+    public AbsPerson(){
+        System.out.println("AbsPerson的构造方法...");
+    }
+    public void run(){
+        System.out.println("走路...");
+    }
+    //抽象方法不允许写方法体
+    abstract public void eat();
+
+    abstract public String foot();
+}
+abstract class AbsCat extends AbsPerson{
+
+   //abstract public void zhualaoshu();
+}
+class Man extends AbsPerson{
+
+    public void eat() {
+        System.out.println("男人喜欢吃肉...");
+    }
+
+    @Override
+    public String foot() {
+        return null;
+    }
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public int eat(String foot) {
+        return 0;
+    }
+
+    @Override
+    public void planeFly() {
+
+    }
+}
+class Women extends AbsPerson{
+
+    @Override
+    public void eat() {
+        System.out.println("女人喜欢吃蔬菜...");
+    }
+
+    @Override
+    public String foot() {
+        return "蔬菜";
+    }
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public int eat(String foot) {
+        return 0;
+    }
+
+    @Override
+    public void planeFly() {
+
+    }
+}
+
+/**
+ * 接口定义
+ * 1、里面的属性，全是公共静态常量
+ * 2、内部的方法都是公有抽象方法
+ * 3、接口可以多继承，类不行
+ * 4、而且子接口可以不重写父接口的抽象方法
+ */
+interface IAnimal{
+    public static final int FOOT_NUM = 10;
+    public abstract void fly();
+    int eat(String foot);
+}
+interface IPlane{
+    void planeFly();
+    default void zaike(){ //不常用
+        System.out.println("载客...");
+    }
+}
+interface IBird extends IAnimal , IPlane{
+}
+
+/**
+ * 类实现接口,必须重写所有的接口中的抽象方法
+ * 类可以多实现接口
+ */
+class Bird implements IAnimal , IPlane{
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public int eat(String foot) {
+        return 0;
+    }
+
+    @Override
+    public void planeFly() {
+
+    }
+}
+
+/**
+ * 多态实例(this , super指的都是调用者)
+ * 1、this.show(O)
+ * 2、super.show(O)
+ * 3、this.show(super..(0))
+ * 4、super.show(super..(O))
+ * 调用过程
+ */
+class A{
+    public void show(D d){
+        System.out.println("A AND D");
+    }
+    public void show(A a){
+        System.out.println("A AND A");
+    }
+
+    public void show(C c){
+        System.out.println("A AND C");
+    }
+}
+class B extends A{
+    public void show(B b){
+        System.out.println("B AND B");
+    }
+    public void show(A a){
+        System.out.println("B AND A");
+    }
+}
+class C extends B{}
+class D extends B{}
