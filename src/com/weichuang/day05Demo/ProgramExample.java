@@ -54,7 +54,9 @@ public class ProgramExample {
         method(women);
     }
     public void method(AbsPerson absPerson){
-        //类型判断instanceof 前者是否属于后者
+        //类型判断instanceof 前者是否属于后者,若不使用instanceof判断可能会出现类转换异常
+        //Man man1 = (Man)absPerson;
+
         if(absPerson instanceof Man){
            Man man = (Man) absPerson ;//向下转型。必须强制类型转换，且需要先确定好类型
            man.eat();
@@ -90,6 +92,33 @@ public class ProgramExample {
         b.show(c);
         System.out.println("------------");
         b.show(d);
+    }
+    /**
+     * 摸版方法模式测试
+     */
+    @Test
+    public void testFn5(){
+        UserManager um = new UserManager();
+        um.checkUser("ssss" , "add");
+        TeacherManager tm = new TeacherManager();
+        tm.checkUser("admin" , "check");
+    }
+
+    /**
+     * 测试Object相关
+     */
+    @Test
+    public void testFn6(){
+        String s1 = "abc";
+        String s2 = "abc";
+        int i1 = 10;
+        int i2 = 10;
+        Student stu1 = new Student(23, "zhangsan" , "20010909");
+        System.out.println(stu1.getClass());
+        System.out.println(stu1.toString());
+        Student stu2 = new Student(22, "zhangsan" , "20010909");
+        System.out.println(s1.equals(s1));
+       // System.out.println(stu1.equals(stu2));
     }
 }
 
@@ -434,3 +463,108 @@ class B extends A{
 }
 class C extends B{}
 class D extends B{}
+/**
+ * 抽象类应用—模板方法模式
+ */
+abstract class BaseManager{
+    public void checkUser(String username , String method){
+        if("admin".equals(username)){
+            execute(method);
+        }else{
+            System.out.println("没有权限执行操作");
+        }
+    }
+    //摸版方法
+    abstract public void execute(String method);
+}
+class UserManager extends BaseManager{
+
+    @Override
+    public void execute(String method) {
+        if("add".equals(method)){
+            System.out.println("添加用户操作");
+        }else if("find".equals(method)){
+            System.out.println("查询用户操作");
+        }
+    }
+}
+class TeacherManager extends BaseManager{
+
+    @Override
+    public void execute(String method) {
+        if("check".equals(method)){
+            System.out.println("检查操作");
+        }
+    }
+}
+
+/**
+ * Object讲解
+ * finalize() 垃圾回收机制GC调用
+ * final 表示最终，常量的修饰符
+ * finally{} 异常相关，最终 try{}catch{}finally{}
+ */
+class Student{
+    private int age;
+    private String name;
+    private String sno;
+
+    public Student() {}
+
+    public Student(int age, String name, String sno) {
+        this.age = age;
+        this.name = name;
+        this.sno = sno;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSno() {
+        return sno;
+    }
+
+    public void setSno(String sno) {
+        this.sno = sno;
+    }
+
+    /**
+     * 重写Object类的equals()方法
+     * @param obj
+     * @return
+     */
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(obj instanceof Student){
+            Student s = (Student) obj;
+            if(this.age != s.age) return false;
+            if(!this.name.equals(s.name)) return false;
+            if(this.sno != s.sno) return false;
+            return true;
+        }
+        return false;
+    }
+    /*@Override
+    public String toString() {
+        return "Student{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                ", sno='" + sno + '\'' +
+                '}';
+    }*/
+}
