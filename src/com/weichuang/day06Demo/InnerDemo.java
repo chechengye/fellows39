@@ -25,10 +25,10 @@ public class InnerDemo {
         o.print4();
         System.out.println("--------------------");
         o.print5("xx", new ISpeak() {
-            @Override
-            public void speak() {
-                System.out.println("我是参数式匿名内部类");
-            }
+                @Override
+                public void speak() {
+                    System.out.println("我是参数式匿名内部类");
+                }
         }, new ISay() {
             @Override
             public void say() {
@@ -131,5 +131,20 @@ class Dog implements ISpeak{
     @Override
     public void speak() {
         System.out.println("汪汪叫...");
+    }
+}
+
+/**
+ * 内部类帮我们变相完成多重继承能力
+ */
+class B{}
+abstract class D{}
+class E{}
+class A extends B{
+    class C extends D{
+
+    }
+    class F extends E{
+
     }
 }
