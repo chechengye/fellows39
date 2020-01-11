@@ -14,11 +14,17 @@ public class LinkedDemo {
         System.out.println("--------------------");
         nm.delete(2);
         nm.show();*/
-        System.out.println("--------------------");
+       /* System.out.println("--------------------");
         nm.insert(2 , 88);
-        nm.show();
+        nm.show();*/
         System.out.println("--------------------");
-        boolean isSuccess = nm.update(3 , 188);
+        boolean isSuccess = nm.update(4 , 188);
+        if(isSuccess){
+            System.out.println("更新成功...");
+            nm.show();
+        }else{
+            System.out.println("更新失败...");
+        }
     }
 
 }
@@ -83,7 +89,14 @@ class NodeManager{
      * @return
      */
     public boolean update(int index, int newData) {
-
+        if(0 == index){
+            if(null != this.root){
+                this.root.setData(newData);
+                return true;
+            }
+        }else{
+            return this.root.updateNode(index , newData);
+        }
         return false;
     }
 
@@ -160,6 +173,26 @@ class NodeManager{
                 this.next.insertNode(index , data);
             }
         }
+
+        /**
+         * 更新节点操作
+         * @param index
+         * @param newData
+         */
+        public boolean updateNode(int index, int newData) {
+            currentIndex++;
+            if(currentIndex == index){
+                if(null != this.next){
+                    this.next.data = newData;
+                    return true;
+                }
+
+            }else{
+                return this.next.updateNode(index,newData);
+            }
+            return false;
+        }
+
         public int getData() {
             return data;
         }
