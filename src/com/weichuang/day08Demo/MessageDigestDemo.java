@@ -27,8 +27,6 @@ public class MessageDigestDemo {
             //Base64 : a-z A-Z 0-9 + /
             // == ： MD5加密后的结束符标记
             String encode = Base64.getEncoder().encodeToString(md5.digest(pwd.getBytes()));
-            System.out.println("-----------解密操作------------");
-            System.out.println(Arrays.toString(Base64.getDecoder().decode(md5.digest(pwd.getBytes()))));
             System.out.println(encode);
 
         } catch (NoSuchAlgorithmException e) {
