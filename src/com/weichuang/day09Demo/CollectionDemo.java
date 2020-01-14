@@ -15,7 +15,10 @@ import java.util.*;
  *
  * set
  * HashSet 、TreeSet 、 LinkedHashSet
- *
+ * Set在实际开发中怎么使用的？
+ * 需要有序的话 LinkedHashSet
+ * 自然排序 TreeSet
+ * 排序以上两种需求后使用HashSet
  */
 public class CollectionDemo {
 
@@ -24,7 +27,54 @@ public class CollectionDemo {
         //arrayList();
         //vector();
         //linkedList();
-        hashSet();
+        //hashSet();
+        //treeSet();
+        linkedHashSet();
+    }
+
+    /**
+     * LinkedHashSet实现原理
+     * 1、HashSet的子类，采用哈希表（链表+数组） 与 双重链表的数据接口
+     * 2、可以保证有序的
+     */
+    public static void linkedHashSet(){
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("tom");
+        linkedHashSet.add("aom");
+        linkedHashSet.add("lucy");
+        linkedHashSet.add("lily");
+        for(String n : linkedHashSet){
+            System.out.println(n);
+        }
+    }
+    /**
+     * TreeSet实现原理
+     * 1、采用二叉树的数据结构，基于TreeMap的实现
+     * 2、可以帮我们按自然顺序排序，树形结构可以进行排序
+     * 3、自定义类，按照自定义规则排序的时候，若比较器返回的值为0的情况下
+     *    ，直接认为两个对象是相同的对象。
+     * 4、储存值的时候，使用的是map，值为map的key而value为Object对象站位
+     * 5、允许重复，但会自动去重
+     */
+    public static void treeSet(){
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        treeSet.add(100);
+        treeSet.add(50);
+        treeSet.add(66);
+        treeSet.add(50);
+        System.out.println(treeSet.size());
+        for(Integer i : treeSet){
+            System.out.println(i);
+        }
+
+        TreeSet<Dog> dogTreeSet = new TreeSet<>(new DogComparator());
+        dogTreeSet.add(new Dog(10 , 1 , "大黄"));
+        dogTreeSet.add(new Dog(30 , 2 , "小白"));
+        dogTreeSet.add(new Dog(20 , 3 , "小黑"));
+        dogTreeSet.add(new Dog(10 , 4 , "泰迪"));
+        for(Dog dog : dogTreeSet){
+            System.out.println(dog);
+        }
     }
 
     /**
