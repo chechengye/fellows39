@@ -1,22 +1,107 @@
 package com.weichuang.day09Demo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Collection
  * 直接子类
  * List 有序的、可存入重复值、可以放多个null
  * ArrayList 、 LinkedList 、 Vector
+ * List的子类在实际开发中什么时候使用呢?
+ *
+ * ArrayList : 有序的集合做过多的查询操作
+ * LinkedList ： 有序的集合做过多的插入与删除操作
+ * Vector : 多线程的时候建议使用
  *
  * set
+ * HashSet 、TreeSet 、 LinkedHashSet
+ *
  */
 public class CollectionDemo {
 
 
     public static void main(String[] args) {
-        arrayList();
+        //arrayList();
+        //vector();
+        //linkedList();
+        hashSet();
+    }
+
+    /**
+     * HashSet实现原理
+     * 1、采用的哈希表（散列队列）真正实现是基于HashMap
+     * 2、储存值的时候，使用的是map，值为map的key而value为Object对象站位
+     * 3、它是无序的，但并不能保证顺序恒久不变
+     * 4、确定前后两个元素是否一致的条件 : hashcode()与equals()方法都相等
+     * 5、不允许重复
+     */
+    public static void hashSet(){
+
+        /*
+        Set<String> set = new HashSet<>();
+        set.add("tom");
+        set.add("lucy");
+        set.add("lily");
+        set.add("jack");
+        set.add("lucy");
+        for(String s : set){
+            System.out.println(s);
+        }*/
+        Set<Cat> catSet = new HashSet<>();
+        Cat c1 = new Cat();
+        c1.setAge(1);
+        c1.setName("喵喵");
+        Cat c2 = new Cat(5 , "花花");
+        Cat c3 = new Cat(2 , "无话");
+        Cat c4 = new Cat(5 , "花花");
+        catSet.add(c1);
+        catSet.add(c2);
+        catSet.add(c3);
+        catSet.add(c4);
+        System.out.println(catSet.size());
+        for(Cat c : catSet){
+            System.out.println(c);
+            System.out.println(c.hashCode());
+        }
+
+        //System.out.println(set.size());
+    }
+
+    /**
+     * LinkedList实现原理
+     * 1、采用双向链表的数据结构
+     * 2、调用只添加一个元素的add方法的时候默认使用尾插法添加元素
+     * 3、做频繁的插入与删除的时候推荐使用
+     * 4、线程不安全的，建议单线程时使用
+     */
+    public static void linkedList(){
+        List<String> list = new LinkedList<>();
+        list.add("飞飞");
+        list.add("备备");
+        list.add("关关");
+        list.add("亮亮");
+        for(String s : list){
+            System.out.println(s);
+        }
+    }
+    /**
+     * Vector实现原理
+     * 1、调用默认的无参构造方法，直接初始化10个容量大小的数组
+     * 2、扩容原理：若增量为0时，扩展到原来数组大小的2倍，否则原来数组容量加上增量
+     * 3、采用的动态数组
+     * 4、不适合做频繁的插入与删除
+     * 5、线程安全的，适合多线程时使用。
+     */
+    public static void vector(){
+        List<String> v = new Vector<>(20 , 10);
+        v.add("飞飞");
+        v.add("备备");
+        v.add("关关");
+        v.add("亮亮");
+        for (String n : v ) {
+            System.out.println(n);
+        }
+
     }
 
     /**
