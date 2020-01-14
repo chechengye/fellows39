@@ -34,7 +34,7 @@ public class CollectionDemo {
 
     /**
      * LinkedHashSet实现原理
-     * 1、HashSet的子类，采用哈希表（链表+数组） 与 双重链表的数据接口
+     * 1、HashSet的子类，采用哈希表（链表+数组） 与 双重链表的数据结构
      * 2、可以保证有序的
      */
     public static void linkedHashSet(){

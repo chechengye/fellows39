@@ -22,7 +22,7 @@ public class StringDemo {
         System.out.println(s1 == s2);
         System.out.println(s1 == s3);
 
-        //如果编译器可确定的值，会直接计算、但是运行期才可以确定的值，就不会直接计算
+        //如果编译期可确定的值，会直接计算、但是运行期才可以确定的值，就不会直接计算
         String a = "1";
         String a1 = "a" + a;
         String a2 = "a1";
