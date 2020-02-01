@@ -16,7 +16,8 @@ public class CollectionsDemo {
         list.add("2");
         list.add("4");
         list.add("2");
-
+        List<String> list1 = new ArrayList<>();
+        list1.add("7");
         //排序相关
         //反转
         //Collections.reverse(list);
@@ -41,8 +42,12 @@ public class CollectionsDemo {
         List<String> syncList = Collections.synchronizedList(list);
         System.out.println("-----------------设置不可变集合-------------------");
         List<Object> emptyList = Collections.emptyList();
-        emptyList.add("test");
+        //emptyList.add("test");
         System.out.println(emptyList);
+        System.out.println("-----------------其它方法-------------------");
+        System.out.println(Collections.disjoint(list, list1));
+        Collections.addAll(list1 , "zhangsan" , "lisi" , "wangwu");
+        System.out.println(list1);
     }
     public List<String> getData(){
         List<String> list = null;
