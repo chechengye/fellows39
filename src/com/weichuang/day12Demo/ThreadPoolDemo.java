@@ -17,6 +17,9 @@ public class ThreadPoolDemo {
         //ExecutorService es = Executors.newSingleThreadExecutor();//单线程池，其中只存放一个线程,若多个线程运行，只能串行操作
         //ExecutorService es = Executors.newFixedThreadPool(2);//可设定固定大小的线程池,若大小设定为1与单线程池一致
         ExecutorService es = Executors.newCachedThreadPool();//获取一个可缓存的线程池，但只能缓存60s。不建议使用
+        /*ExecutorService executorService = Executors.newWorkStealingPool();//窃取的线程池，必须得保证有一个线程池已经在使用
+        executorService.execute(new MyRunnable4());
+        executorService.shutdown();*/
         ScheduledExecutorService ses = Executors.newScheduledThreadPool(2);//可延迟操作的线程池，而且可以自己设置时间单位
         ses.schedule(new MyRunnable4() , 3000 , TimeUnit.MILLISECONDS);
         ses.shutdown();
