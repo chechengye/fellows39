@@ -12,6 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
  *    2) 同步方法
  *    3) lock方式，更加灵活，推荐
  *  4、多线程共享数据，会产生安全问题，使用同步可以解决安全问题，但要牺牲一定的性能
+ *  5、同步准则
+ *  （1）使代码块保持简短。把不随线程变化的预处理和后处理移出synchronized 块。
+ *  （2）不要阻塞。如InputStream.read()。
+ *  （3）在持有锁的时候，不要对其它对象调用同步方法。
  */
 public class ThreadSyncDemo {
 
@@ -23,13 +27,14 @@ public class ThreadSyncDemo {
        t2.start();
     }
 }
-class MyRunnable2 implements Runnable{
+class MyRunnable2 implements Runnable {
     private int ticket = 10;//售票，作为共享的数据
     //private Integer a = 1;
     private Object obj = new Object();
+
     @Override
     public void run() {
-        for(int i = 0 ; i < 300 ; i++){
+        for (int i = 0; i < 300; i++) {
             //A B
             //此时B只能在此等候
             /*synchronized (obj){//A先进入同步代码块，进行上锁。同步代码块中的代码执行完毕之后，才会让出监视器的所有权（释放锁）
@@ -51,8 +56,8 @@ class MyRunnable2 implements Runnable{
     /**
      * 使用同步方法实现上锁，默认的同步对象就是this
      */
-    private synchronized void method(){
-        if(ticket > 0){
+    private synchronized void method() {
+        if (ticket > 0) {
             ticket--;
             try {
                 Thread.sleep(1000);//模拟售票员操作时间，让出CPU的时间片、没有释放监视器的所有权（锁）
@@ -62,15 +67,17 @@ class MyRunnable2 implements Runnable{
             System.out.println("剩余的票数为: " + ticket + "张");
         }
     }
+
     /**
      * lock方式上锁
      * ReentrantLock : 可重入锁，互斥锁
      */
     ReentrantLock rLock = new ReentrantLock();
-    private void method2(){
+
+    private void method2() {
         rLock.lock();//进行上锁
-        try{
-            if(ticket > 0){
+        try {
+            if (ticket > 0) {
                 ticket--;
                 try {
                     Thread.sleep(1000);//模拟售票员操作时间，让出CPU的时间片、没有释放监视器的所有权（锁）
@@ -79,7 +86,7 @@ class MyRunnable2 implements Runnable{
                 }
                 System.out.println("剩余的票数为:" + ticket + "张");
             }
-        }finally {
+        } finally {
             rLock.unlock();//释放锁，放置于finally块中保证不会死锁，阻塞。保证一定会被执行
         }
     }
