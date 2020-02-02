@@ -7,7 +7,7 @@ package com.weichuang.day12Demo;
  * sleep与wait方法的区别（逢多线程必问）
  * sleep: 会让线程进入休眠状态，让出CPU的时间片,但是不会让出监视器的所有权，不释放锁
  * wait: 会让线程进入等待状态，也会让出CPU的时间片，但是会让出监视器的所有权，就是释放锁
- *      ，等待调用notify或notifyAll将其唤醒
+ *      ，等待调用notify或notifyAll将其唤醒。条件此对象已经获得了监视器，有锁。
  */
 public class ProducerCustomerDemo {
     public static void main(String[] args) {
