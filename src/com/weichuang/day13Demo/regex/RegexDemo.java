@@ -56,6 +56,6 @@ public class RegexDemo {
         //5、验证年龄（100以内）
         String s5 = "11";
         System.out.println(s5.matches("^[\\d]{1,2}"));
-        
+
     }
 }
