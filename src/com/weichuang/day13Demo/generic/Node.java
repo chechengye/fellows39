@@ -6,8 +6,10 @@ package com.weichuang.day13Demo.generic;
  */
 public class Node<T> {
     private T data;
-    public Node(T data){
+    private int age;
+    public Node(T data , int age){
         this.data = data;
+        this.age = age;
     }
     public T getData() {
         return data;

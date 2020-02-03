@@ -2,8 +2,7 @@ package com.weichuang.day13Demo.generic;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GenericDemo {
 
@@ -17,14 +16,16 @@ public class GenericDemo {
             String name = list.get(i); // 2
             System.out.println("name:" + name);
         }
+        //可变参数方法调用
+        printMsg(10 , "zhangsan" , 0.1f);
     }
 
     @Test
     public void testFn(){
         //T被参数化类型决定
-        Node<Number> n1 = new Node<>(10);
-        Node<Integer> n2 = new Node<>(10);
-        Node<String> n6 = new Node<>("20");
+        Node<Number> n1 = new Node<>(10,3);
+        Node<Integer> n2 = new Node<>(10,5);
+        Node<String> n6 = new Node<>("20",8);
         Number n3 = 10;
         Integer n4 = 10;
         //n4 = n3;
@@ -37,6 +38,11 @@ public class GenericDemo {
         //method3(n6); String 不是 Integer的父类不允许此操作
         method1(n6);
         System.out.println(n1.getData());
+        System.out.println("--------------------------");
+        String[] arr = {"tom","jack","lily","lucy"};
+        Integer[] arr1 = {10 , 20 , 30 ,50};
+        System.out.println(Arrays.toString(func(arr1, 0, 2)));
+
     }
 
     /**
@@ -63,5 +69,30 @@ public class GenericDemo {
     //设置一个下限 Integer及其父类
     private void method3(Node<? super Integer> node){
         System.out.println(node.getData());
+    }
+    //可变参数的泛型方法
+    public static <T> void printMsg(T... args){
+        for(T s : args){
+            System.out.println(s);
+        }
+    }
+    //任意类型的数组，交换其中的两个数
+    public static <T> T[] func(T[] arr , int i , int j){
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        return arr;
+    }
+    @Test
+    public void testFn1(){
+        //自定义循环嵌套
+        School<Student> s = new School<>(new Student<>("98"));
+        System.out.println(s.getStu().getCore());
+        Map<Integer , String> map = new HashMap<>();
+        map.put(1 , "飞飞");
+        map.put(2 , "备备");
+        map.put(3 , "关关");
+        Set<Map.Entry<Integer, String>> entries = map.entrySet();
+        entries.forEach(e-> System.out.println(e.getKey() + "->" + e.getValue()));
     }
 }
